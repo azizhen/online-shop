@@ -15,6 +15,7 @@
         <org.aspectj-version>1.7.4</org.aspectj-version>
         <org.slf4j-version>1.7.5</org.slf4j-version>
         <metrics-version>3.0.1</metrics-version>
+        <hibernate-version>4.1.0.Final</hibernate-version>
         <jdwp></jdwp>
     </properties>
 
@@ -159,7 +160,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>4.1.0.Final</version>
+            <version>${hibernate-version}</version>
         </dependency>
 
         <!-- Joda Time Library -->
@@ -233,12 +234,12 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>3.6.10.Final</version>
+            <version>${hibernate-version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>3.6.10.Final</version>
+            <version>${hibernate-version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
