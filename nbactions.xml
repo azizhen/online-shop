@@ -14,4 +14,12 @@
                 <goal>jetty:run</goal>
             </goals>
         </action>
+        <action>
+            <actionName>CUSTOM-stop start jetty</actionName>
+            <displayName>stop start jetty</displayName>
+            <goals>
+                <goal>jetty:stop</goal>
+                <goal>jetty:run</goal>
+            </goals>
+        </action>
     </actions>

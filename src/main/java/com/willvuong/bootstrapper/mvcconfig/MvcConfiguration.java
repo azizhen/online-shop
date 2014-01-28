@@ -15,7 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.willvuong.bootstrapper.controllers", "co.za.hendricks.controllers"} )
+@ComponentScan(basePackages = {"com.willvuong.bootstrapper.controllers", "co.za.hendricks"} )
 public class MvcConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

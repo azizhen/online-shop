@@ -4,29 +4,29 @@
  * and open the template in the editor.
  */
 
-package co.za.hendricks.dao;
+package co.za.hendricks.services;
 
+import co.za.hendricks.dao.ProductDAO;
 import co.za.hendricks.domain.Product;
 import java.util.List;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author aziz
  */
-@Repository
-public class ProductDAO {
+@Service
+public class ProductService {
+    
     @Autowired
-    private SessionFactory sessionFactory;
+    private ProductDAO productDAO;
     
     public void createProduct(Product product){
-        sessionFactory.getCurrentSession().save(product);
+        productDAO.createProduct(product);
     }
-    
-    public List<Product> findAll(){
-        return sessionFactory.getCurrentSession().createQuery("select * from Product").list();
+
+    public List<Product> getProductList() {
+        return productDAO.findAll();
     }
- 
 }
