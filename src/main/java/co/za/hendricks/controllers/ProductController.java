@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -27,7 +28,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
     
-    @RequestMapping("/createBook")
+    @RequestMapping(value = "/createBook", method = RequestMethod.POST)
     public @ResponseBody Book createBook(
            @RequestBody Book book){
         productService.createProduct(book);
@@ -35,9 +36,9 @@ public class ProductController {
         
     }    
     
-    @RequestMapping("/createGame")
+    @RequestMapping(value = "/createGame", method = RequestMethod.POST)
     public @ResponseBody Product createGame(
-           @RequestParam(value="game", required=true)Game game){
+           @RequestBody Game game){
 
         productService.createProduct(game);        
         return game;
