@@ -29,10 +29,7 @@ public class AppConfiguration {
     }
 
     @Bean
-    public LocalSessionFactoryBean sessionFactoryBean() {
-        LocalSessionFactoryBean result = new LocalSessionFactoryBean();
-        result.setDataSource(dataSource());
-        result.setPackagesToScan(new String[] { "co.za.hendricks.domain" });
+    public Properties getHibernateProperties(){
         Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
         properties.setProperty("dialect", "org.hibernate.dialect.HSQLDialect");
@@ -42,15 +39,28 @@ public class AppConfiguration {
         properties.setProperty("hibernate.connection.username", "sa");
         properties.setProperty("hibernate.connection.password", "");
         properties.setProperty("hibernate.show_sql", "true");
+        properties.setProperty("hibernate.current_session_context_class", "thread");
+        return properties;
+    }
+    @Bean
+    public LocalSessionFactoryBean sessionFactoryBean() {
         
         
-        result.setHibernateProperties(properties);
+        
+        LocalSessionFactoryBean result = new LocalSessionFactoryBean();
+        result.setDataSource(dataSource());
+        result.setPackagesToScan(new String[] { "co.za.hendricks"});
+        
+               
+        result.setHibernateProperties(getHibernateProperties());
         return result;
 
     }
 
     @Bean
     public SessionFactory sessionFactory() {
+        
+        
         return sessionFactoryBean().getObject();
     } 
 
@@ -60,6 +70,7 @@ public class AppConfiguration {
         man.setSessionFactory(sessionFactory());
         return man;
     }
+  
 
 }
 

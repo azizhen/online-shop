@@ -22,4 +22,13 @@
                 <goal>jetty:run</goal>
             </goals>
         </action>
+        <action>
+            <actionName>CUSTOM-jetty:run-forked -P debug</actionName>
+            <displayName>jetty:run-forked -P debug</displayName>
+            <goals>
+                <goal>jetty:run-forked</goal>
+                <goal>-P</goal>
+                <goal>debug</goal>
+            </goals>
+        </action>
     </actions>

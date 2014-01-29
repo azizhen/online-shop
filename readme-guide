@@ -1,0 +1,4 @@
+Sample REST calls for REST API
+
+http://localhost:8080/productlist/listProducts
+http://localhost:8080/productlist/createProduct?title=aziz

@@ -23,6 +23,14 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title;
+    
+    public Product(){
+        
+    }
+    
+    public Product(String title){
+        this.title = title;
+    }
 
     public Long getId() {
         return id;
