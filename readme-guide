@@ -1,4 +1,23 @@
 Sample REST calls for REST API
 
+GET
 http://localhost:8080/productlist/listProducts
-http://localhost:8080/productlist/createProduct?title=aziz
+
+
+POST
+http://localhost:8080/productlist/createBook
+
+{
+        "title": "War of the Worlds",
+        "shortDescription": "Sci Fi Book",
+        "isbn": "isbn12345"
+}
+
+POST
+http://localhost:8080/productlist/createGame
+
+{
+        "title": "FIFA 14",
+        "shortDescription": "Soccer Simulation",
+        "format": "PS3 Blu Ray"
+}
