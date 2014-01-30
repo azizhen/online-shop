@@ -7,14 +7,17 @@
 package co.za.hendricks.domain;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -33,6 +36,9 @@ public class Product implements Serializable {
     private Long id;
     private String title;
     private String shortDescription;
+    
+    @OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    private Price price;
     
     public Product(){
         
@@ -70,6 +76,20 @@ public class Product implements Serializable {
      */
     public void setShortDescription(String shortDescription) {
         this.shortDescription = shortDescription;
+    }
+
+    /**
+     * @return the price
+     */
+    public Price getPrice() {
+        return price;
+    }
+
+    /**
+     * @param price the price to set
+     */
+    public void setPrice(Price price) {
+        this.price = price;
     }
     
 }

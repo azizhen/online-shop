@@ -21,3 +21,19 @@ http://localhost:8080/productlist/createGame
         "shortDescription": "Soccer Simulation",
         "format": "PS3 Blu Ray"
 }
+
+
+POST
+http://localhost:8080/productlist/createBook
+{
+        "title": "War of the Worlds",
+        "shortDescription": "Sci Fi Book",
+        "isbn": "isbn12345",
+        "price": {
+            "costPrice": "100.00",
+            "sellingPrice": "200.00",
+            "supplier": {
+                "name": "Caxtons Books"
+            }
+        }
+    }

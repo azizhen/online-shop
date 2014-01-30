@@ -16,6 +16,8 @@
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <class>co.za.hendricks.domain.Product</class>
     <class>co.za.hendricks.domain.Book</class>
+    <class>co.za.hendricks.domain.Price</class>
+    <class>co.za.hendricks.domain.Supplier</class>
     <properties>
       <property name="dialect" value="org.hibernate.dialect.HSQLDialect"/>
       <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver"/>
