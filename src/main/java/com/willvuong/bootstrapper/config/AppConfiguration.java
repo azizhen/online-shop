@@ -1,8 +1,15 @@
 package com.willvuong.bootstrapper.config;
 
+import co.za.hendricks.dao.DataLoader;
+import co.za.hendricks.dao.ProductDAO;
+import co.za.hendricks.services.ProductService;
+import com.willvuong.bootstrapper.filter.LogbackResponseServletFilter;
 import java.util.Properties;
+import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -23,9 +30,24 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Import(MetricsConfiguration.class)
 public class AppConfiguration {
     
-    @Bean
+     @Bean
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.HSQL).setName("onlinestore").build();
+    }
+    
+    @Bean
+    public ProductService getProductService(){
+        return new ProductService();
+    }
+    
+    @Bean
+    public ProductDAO getProductDAO(){
+        return new ProductDAO(sessionFactory());
+    }
+    
+    @Bean
+    public DataLoader getDataLoader(){
+        return new DataLoader();
     }
 
     @Bean
@@ -44,14 +66,9 @@ public class AppConfiguration {
     }
     @Bean
     public LocalSessionFactoryBean sessionFactoryBean() {
-        
-        
-        
         LocalSessionFactoryBean result = new LocalSessionFactoryBean();
         result.setDataSource(dataSource());
         result.setPackagesToScan(new String[] { "co.za.hendricks"});
-        
-               
         result.setHibernateProperties(getHibernateProperties());
         return result;
 

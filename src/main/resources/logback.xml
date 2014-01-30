@@ -23,8 +23,7 @@
     <logger name="org.springframework" level="INFO"/>
     <logger name="com.willvuong" level="DEBUG"/>
     <logger name="com.willvuong.bootstrapper.filter.LogbackResponseServletFilter" level="TRACE"/>
-    <logger name="org.hibernate.type" level="TRACE" />
-    <logger name="org.hibernate" level="TRACE" />
+    <logger name="org.hibernate" level="INFO" />
     <root level="WARN">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="THREADLOCAL"/>

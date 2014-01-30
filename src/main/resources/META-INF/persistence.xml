@@ -18,6 +18,10 @@
     <class>co.za.hendricks.domain.Book</class>
     <class>co.za.hendricks.domain.Price</class>
     <class>co.za.hendricks.domain.Supplier</class>
+    <class>co.za.hendricks.domain.User</class>
+    <class>co.za.hendricks.domain.Person</class>
+    <class>co.za.hendricks.domain.Company</class>
+    <class>co.za.hendricks.domain.Basket</class>
     <properties>
       <property name="dialect" value="org.hibernate.dialect.HSQLDialect"/>
       <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver"/>
