@@ -2,14 +2,12 @@ package com.willvuong.bootstrapper.config;
 
 import co.za.hendricks.dao.DataLoader;
 import co.za.hendricks.dao.ProductDAO;
+import co.za.hendricks.dao.UserDAO;
 import co.za.hendricks.services.ProductService;
-import com.willvuong.bootstrapper.filter.LogbackResponseServletFilter;
+import co.za.hendricks.services.UserService;
 import java.util.Properties;
-import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import org.hibernate.SessionFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -46,6 +44,16 @@ public class AppConfiguration {
     }
     
     @Bean
+    public UserService getUserService(){
+        return new UserService();
+    }
+    
+    @Bean
+    public UserDAO getUserDAO(){
+        return new UserDAO(sessionFactory());
+    }
+    
+    @Bean
     public DataLoader getDataLoader(){
         return new DataLoader();
     }
@@ -76,8 +84,6 @@ public class AppConfiguration {
 
     @Bean
     public SessionFactory sessionFactory() {
-        
-        
         return sessionFactoryBean().getObject();
     } 
 
@@ -87,8 +93,6 @@ public class AppConfiguration {
         man.setSessionFactory(sessionFactory());
         return man;
     }
-  
-
 }
 
     

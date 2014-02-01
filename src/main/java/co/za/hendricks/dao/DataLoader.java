@@ -17,11 +17,15 @@
 
 package co.za.hendricks.dao;
 
+import co.za.hendricks.domain.Basket;
 import co.za.hendricks.domain.Book;
+import co.za.hendricks.domain.Company;
 import co.za.hendricks.domain.Game;
+import co.za.hendricks.domain.Person;
 import co.za.hendricks.domain.Price;
 import co.za.hendricks.domain.Supplier;
 import co.za.hendricks.services.ProductService;
+import co.za.hendricks.services.UserService;
 import com.willvuong.bootstrapper.filter.LogbackResponseServletFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,14 +39,27 @@ import org.springframework.context.event.ContextRefreshedEvent;
  */
 public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
 
-public static boolean isDataLoaded = false;
+    public static boolean isDataLoaded = false;
+    
     @Autowired
     private ProductService productService;
     
+    @Autowired
+    private UserService userService;
+    
     private static final Logger logger = LoggerFactory.getLogger(LogbackResponseServletFilter.class);
-    @Override
-        public void onApplicationEvent(ContextRefreshedEvent event) {
+    
+    /**
+     * Overiding the onApplicationEvent that detects if Spring Context is loaded.
+     * Uses a static variable to ensure that this runs only once
+     * @param event 
+     */
+     @Override
+     public void onApplicationEvent(ContextRefreshedEvent event) {
             
+            /* ContextRefreshedEvent could be triggered more than once, 
+               therefore build in a check to prevent this from running twicw
+             */
             if(DataLoader.isDataLoaded != true){
              
              logger.info("-------------------------------");
@@ -54,14 +71,20 @@ public static boolean isDataLoaded = false;
              createBookHelper("Life the Universe and Everything", "Science Fiction Classic", "1133857396", "Caxton Books", 120.00, 169.00);
              createBookHelper("The Amazing X-Men", "Comic Book", "1133857396", "Marvel Comics", 40.00, 10.00);
              createBookHelper("Uncanny X-men", "Comic Book", "1133857396", "Caxton Books", 100.00, 159.00);
-             
              logger.info("Loading Books completed...");
              
              logger.info("Loading Games started...");
              createGameHelper("FIFA 14", "Soccer Simulation", "PS3", "EA Sports", 250.00, 550.00);
              createGameHelper("Grand Theft Auto V", "Open World Third Person", "PS3", "Rockstar Games", 299.00, 750.00);
-             
              logger.info("Loading Games completed...");
+             
+             logger.info("Loading Users started...");
+             createPersonUserHelper("aziz", "Aziz", "Hendricks", "password");
+             createPersonUserHelper("admin", "admin", "admin", "password");
+             createCompanyUserHelper("company", "Big Company", "vat1234", "password");
+             logger.info("Loading Users completed...");
+             
+             
              logger.info("-------------------------------");
              logger.info("Loading Data completed.");
              logger.info("-------------------------------");
@@ -99,6 +122,15 @@ public static boolean isDataLoaded = false;
              productService.createProduct(book);
         }
         
+        /**
+         * Utility method to create a Game object
+         * @param title
+         * @param shortDescription
+         * @param format
+         * @param supplierName
+         * @param costPrice
+         * @param sellingPrice 
+         */
         private void createGameHelper(String title, String shortDescription, String format, String supplierName, double costPrice, double sellingPrice){
              
              Game game = new Game();
@@ -117,5 +149,49 @@ public static boolean isDataLoaded = false;
              game.setPrice(price);
              
              productService.createProduct(game);
+        }
+        
+        /**
+         * Utility method to create Person users
+         * @param username
+         * @param firstname
+         * @param lastName
+         * @param password 
+         */
+         private void createPersonUserHelper(String username, String firstname, String lastName, String password){
+             
+             Person person = new Person();
+             person.setFirstName(firstname);
+             person.setLastName(lastName);
+             person.setUsername(username);
+             person.setPassword(password);
+             
+             //Empty Basket
+             Basket basket = new Basket();
+             person.setBasket(basket);
+             
+             userService.createUser(person);
+        }
+         
+         /**
+          * Utility method to create Company Users
+          * @param username
+          * @param name
+          * @param vatNo
+          * @param password 
+          */
+         private void createCompanyUserHelper(String username, String name, String vatNo, String password){
+             
+             Company company = new Company();
+             company.setName(name);
+             company.setVatNo(vatNo);
+             company.setUsername(username);
+             company.setPassword(password);
+             
+             //Empty Basket
+             Basket basket = new Basket();
+             company.setBasket(basket);
+             
+             userService.createUser(company);
         }
 }
