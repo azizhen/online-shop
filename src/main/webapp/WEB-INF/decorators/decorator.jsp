@@ -26,13 +26,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Project name</a>
+                <a class="navbar-brand" href="#">Online Shop</a>
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li class="active"><a href="#">Product List</a></li>
+                    <li><a href="#about">My Profile</a></li>
+                    <li><a href="#contact">My Basket</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
@@ -40,12 +40,12 @@
 
     <div class="container" style="padding-top: 60px">
         <div class="starter-template">
-            <h1>Bootstrap starter template</h1>
-            <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+            <h1>Games and Books</h1>
+            <p class="lead">In Stock</p>
         </div>
 
         <div class="body">
-            <h1>Decorated body</h1>
+            <p>PLACE PRODUCT LIST HERE</p>
             <decorator:body />
         </div>
 

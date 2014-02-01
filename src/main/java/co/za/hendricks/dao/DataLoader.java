@@ -43,36 +43,55 @@ public static boolean isDataLoaded = false;
         public void onApplicationEvent(ContextRefreshedEvent event) {
             
             if(DataLoader.isDataLoaded != true){
-                
-            
-            logger.info("-------------------------------");
-            logger.info("Loading Default Data for application.");
-            logger.info("-------------------------------");
              
-            
+             logger.info("-------------------------------");
+             logger.info("Loading Default Data for application.");
+             logger.info("-------------------------------");
+             
              logger.info("Loading Books started...");
-             Book book = new Book();
-             book.setIsbn("ISBN1234");
-             book.setTitle("War of the Worlds");
-             book.setShortDescription("Sci Fi");
-             Supplier supplier = new Supplier();
-             supplier.setName("Caxton Books");
-             
-             Price price  = new Price();
-             price.setCostPrice(100.00);
-             price.setSellingPrice(200.00);
-             price.setSupplier(supplier);
-             
-             
-             book.setPrice(price);
-             productService.createProduct(book);
+             createBookHelper("War of the Worlds", "Science Fiction Classic", "1133857396", "Caxton Books", 100.00, 159.00);
+             createBookHelper("Life the Universe and Everything", "Science Fiction Classic", "1133857396", "Caxton Books", 120.00, 169.00);
+             createBookHelper("The Amazing X-Men", "Comic Book", "1133857396", "Marvel Comics", 40.00, 10.00);
+             createBookHelper("Uncanny X-men", "Comic Book", "1133857396", "Caxton Books", 100.00, 159.00);
+             createBookHelper("War of the Worlds", "Comic Book", "1133857396", "Caxton Books", 100.00, 159.00);
+             createBookHelper("War of the Worlds", "Comic Book", "1133857396", "Caxton Books", 100.00, 159.00);
+             createBookHelper("War of the Worlds", "Comic Book", "1133857396", "Caxton Books", 100.00, 159.00);
              
              logger.info("Loading Books completed...");
-            logger.info("-------------------------------");
-            logger.info("Loading Data completed.");
-            logger.info("-------------------------------");
+             logger.info("-------------------------------");
+             logger.info("Loading Data completed.");
+             logger.info("-------------------------------");
              DataLoader.isDataLoaded = true;   
             
               }
+        }
+        
+        /**
+         * Utility method to create a Book object
+         * @param title
+         * @param shortDescription
+         * @param isbn
+         * @param supplierName
+         * @param costPrice
+         * @param sellingPrice 
+         */
+        private void createBookHelper(String title, String shortDescription, String isbn, String supplierName, double costPrice, double sellingPrice){
+             
+             Book book = new Book();
+             book.setTitle(title);
+             book.setShortDescription(shortDescription);
+             book.setIsbn(isbn);
+             
+             Supplier supplier = new Supplier();
+             supplier.setName(supplierName);
+             
+             Price price  = new Price();
+             price.setCostPrice(costPrice);
+             price.setSellingPrice(sellingPrice);
+             price.setSupplier(supplier);
+             
+             book.setPrice(price);
+             
+             productService.createProduct(book);
         }
 }
