@@ -18,6 +18,7 @@
 package co.za.hendricks.dao;
 
 import co.za.hendricks.domain.Book;
+import co.za.hendricks.domain.Game;
 import co.za.hendricks.domain.Price;
 import co.za.hendricks.domain.Supplier;
 import co.za.hendricks.services.ProductService;
@@ -53,11 +54,14 @@ public static boolean isDataLoaded = false;
              createBookHelper("Life the Universe and Everything", "Science Fiction Classic", "1133857396", "Caxton Books", 120.00, 169.00);
              createBookHelper("The Amazing X-Men", "Comic Book", "1133857396", "Marvel Comics", 40.00, 10.00);
              createBookHelper("Uncanny X-men", "Comic Book", "1133857396", "Caxton Books", 100.00, 159.00);
-             createBookHelper("War of the Worlds", "Comic Book", "1133857396", "Caxton Books", 100.00, 159.00);
-             createBookHelper("War of the Worlds", "Comic Book", "1133857396", "Caxton Books", 100.00, 159.00);
-             createBookHelper("War of the Worlds", "Comic Book", "1133857396", "Caxton Books", 100.00, 159.00);
              
              logger.info("Loading Books completed...");
+             
+             logger.info("Loading Games started...");
+             createGameHelper("FIFA 14", "Soccer Simulation", "PS3", "EA Sports", 250.00, 550.00);
+             createGameHelper("Grand Theft Auto V", "Open World Third Person", "PS3", "Rockstar Games", 299.00, 750.00);
+             
+             logger.info("Loading Games completed...");
              logger.info("-------------------------------");
              logger.info("Loading Data completed.");
              logger.info("-------------------------------");
@@ -93,5 +97,25 @@ public static boolean isDataLoaded = false;
              book.setPrice(price);
              
              productService.createProduct(book);
+        }
+        
+        private void createGameHelper(String title, String shortDescription, String format, String supplierName, double costPrice, double sellingPrice){
+             
+             Game game = new Game();
+             game.setTitle(title);
+             game.setShortDescription(shortDescription);
+             game.setFormat(format);
+             
+             Supplier supplier = new Supplier();
+             supplier.setName(supplierName);
+             
+             Price price  = new Price();
+             price.setCostPrice(costPrice);
+             price.setSellingPrice(sellingPrice);
+             price.setSupplier(supplier);
+             
+             game.setPrice(price);
+             
+             productService.createProduct(game);
         }
 }

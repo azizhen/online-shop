@@ -50,4 +50,9 @@ public class ProductController {
         return productService.getProductList();
     }
     
+    @RequestMapping("/product")
+    public @ResponseBody Product getProduct(@RequestParam(value="productID", required=true) long id){
+        return productService.getProduct(id);
+    }
+    
 }

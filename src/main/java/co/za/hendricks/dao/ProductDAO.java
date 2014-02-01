@@ -48,5 +48,12 @@ public class ProductDAO {
         tx.commit();
         return productList;
     }
+    
+    public Product getProduct(long productID){
+        Transaction tx  = this.sessionFactory.getCurrentSession().beginTransaction();
+        Product product =  (Product)this.sessionFactory.getCurrentSession().get(Product.class, productID);
+        tx.commit();
+        return product;
+    }
  
 }

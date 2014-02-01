@@ -4,11 +4,13 @@
 
 
 function ProductController($scope, $http)  {
-  $http.get('http://localhost:8080/productlist/listProducts').
-        success(function(data) {
+  $http.get('http://localhost:8080/productlist/listProducts').success(function(data) {
             $scope.products = data;
         });  
 }
-function MyCtrl2() {
+
+function ProductDetailController($scope, $routeParams, $http){
+    $http.get('http://localhost:8080/productlist/product?productID=' + $routeParams.productID).success(function(data) {
+      $scope.product = data;
+    });
 }
-MyCtrl2.$inject = [];

@@ -45,7 +45,6 @@
         </div>
 
         <div class="body">
-            <p>PLACE PRODUCT LIST HERE</p>
             <decorator:body />
         </div>
 

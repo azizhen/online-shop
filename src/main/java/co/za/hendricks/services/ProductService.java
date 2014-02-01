@@ -32,4 +32,9 @@ public class ProductService {
     public List<Product> getProductList() {
         return productDAO.findAll();
     }
+    
+    @Transactional
+    public Product getProduct(long id) {
+        return productDAO.getProduct(id);
+    }
 }

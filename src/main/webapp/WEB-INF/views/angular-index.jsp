@@ -9,7 +9,6 @@
 <body ng-app="myApp">
   <ul class="menu">
     <li><a href="#/productList">Product List</a></li>
-    <li><a href="#/view2">My Basket</a></li>
   </ul>
 
   <div ng-view></div>
