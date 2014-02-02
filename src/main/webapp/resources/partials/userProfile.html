@@ -1,0 +1,19 @@
+<div>
+    <h1>My Profile</h1>    
+    <h2>{{user.username}}</h2>
+    <hr>
+    <p>{{user.firstName}}</p>
+    <p>{{user.lastName}}</p>
+    <p>{{user.name}}</p>
+    <p>{{user.vatNo}}</p>
+
+    <h2>My Basket</h2>
+    <hr>
+    <ul class="list-group">
+       
+        <li ng-repeat="product in user.basket.products"  class="list-group-item">
+            <a href="#/products/{{product.id}}"><h2>{{product.title}}</h2></a><p class="label label-primary">R{{product.price.sellingPrice}}</p>
+            <p>{{product.shortDescription}}</p>
+        </li>
+    </ul> 
+<div/>

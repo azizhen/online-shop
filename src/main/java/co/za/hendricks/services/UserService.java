@@ -24,11 +24,19 @@ public class UserService {
     @Autowired
     private UserDAO userDAO;
     
+    /**
+     * Creates user entity
+     * @param user 
+     */
     @Transactional
     public void createUser(User user){
         userDAO.createUser(user);
     }
 
+    /**
+     * Returns list of all users in the database
+     * @return 
+     */
     @Transactional
     public List<User> getUserList() {
         return userDAO.findAll();
@@ -39,7 +47,14 @@ public class UserService {
         return userDAO.getUserByUsername(username);
     }
     
-     @Transactional
+    /**
+     * Encrypts the users password and then compares the hashed password to the
+     * password stored in the database
+     * @param username
+     * @param password
+     * @return 
+     */
+    @Transactional
     public boolean userLogin(String username, String password) {
         User user = this.getUser(username);
         

@@ -6,6 +6,7 @@
 
 package co.za.hendricks.dao;
 
+import co.za.hendricks.domain.Basket;
 import co.za.hendricks.domain.Product;
 import co.za.hendricks.domain.User;
 import co.za.hendricks.utility.ApplicationUtility;
@@ -54,11 +55,29 @@ public class UserDAO {
     
     public User getUserByUsername(String username){
         Transaction tx  = this.sessionFactory.getCurrentSession().beginTransaction();
+                
         User user =  (User)this.sessionFactory.getCurrentSession().createQuery("select u from User u where u.username = :username")
         .setParameter("username", username).uniqueResult();
      
         tx.commit();
         return user;
+    }
+    
+    public List <Product> addProductToUserBasket(User user, Product product){
+        
+        Transaction tx  = this.sessionFactory.getCurrentSession().beginTransaction();
+        
+        //Create a basket for the user if this is the first product
+        if(user.getBasket() == null){
+            Basket basket = new Basket();
+            user.setBasket(basket);
+        }
+        
+        user.getBasket().getProducts().add(product);
+        this.sessionFactory.getCurrentSession().merge(user);
+        tx.commit();
+        
+        return user.getBasket().getProducts();
     }
  
 }

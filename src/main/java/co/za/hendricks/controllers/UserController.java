@@ -6,7 +6,9 @@
 
 package co.za.hendricks.controllers;
 
+import co.za.hendricks.domain.Product;
 import co.za.hendricks.domain.User;
+import co.za.hendricks.services.BasketService;
 import co.za.hendricks.services.UserService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class UserController {
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private BasketService basketService;
     
     @RequestMapping(value = "/createUser", method = RequestMethod.POST)
     public @ResponseBody User createUser(
@@ -46,4 +51,14 @@ public class UserController {
         return userService.userLogin(username, password);
     }
     
+    @RequestMapping("/userDetails")
+    public @ResponseBody User user(@RequestParam(value="username", required=true) String username){
+        return userService.getUser(username);
+    }
+    
+    @RequestMapping("/addProductToBasket")
+    public @ResponseBody List<Product> addProductToUserBasket(@RequestParam(value="username", required=true) String username, 
+                                       @RequestParam(value="productID", required=true) long productID){
+        return basketService.addProductToUserBasket(username, productID);
+    }
 }

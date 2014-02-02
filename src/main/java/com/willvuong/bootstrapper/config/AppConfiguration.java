@@ -3,6 +3,7 @@ package com.willvuong.bootstrapper.config;
 import co.za.hendricks.dao.DataLoader;
 import co.za.hendricks.dao.ProductDAO;
 import co.za.hendricks.dao.UserDAO;
+import co.za.hendricks.services.BasketService;
 import co.za.hendricks.services.ProductService;
 import co.za.hendricks.services.UserService;
 import java.util.Properties;
@@ -28,36 +29,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Import(MetricsConfiguration.class)
 public class AppConfiguration {
     
-     @Bean
-    public DataSource dataSource() {
-        return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.HSQL).setName("onlinestore").build();
-    }
-    
-    @Bean
-    public ProductService getProductService(){
-        return new ProductService();
-    }
-    
-    @Bean
-    public ProductDAO getProductDAO(){
-        return new ProductDAO(sessionFactory());
-    }
-    
-    @Bean
-    public UserService getUserService(){
-        return new UserService();
-    }
-    
-    @Bean
-    public UserDAO getUserDAO(){
-        return new UserDAO(sessionFactory());
-    }
-    
-    @Bean
-    public DataLoader getDataLoader(){
-        return new DataLoader();
-    }
-
     @Bean
     public Properties getHibernateProperties(){
         Properties properties = new Properties();
@@ -92,6 +63,46 @@ public class AppConfiguration {
         HibernateTransactionManager man = new HibernateTransactionManager();
         man.setSessionFactory(sessionFactory());
         return man;
+    }
+    
+    @Bean
+    public DataSource dataSource() {
+        return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.HSQL).setName("onlinestore").build();
+    }
+    
+    // Configure DAO
+        
+    @Bean
+    public ProductDAO getProductDAO(){
+        return new ProductDAO(sessionFactory());
+    }
+    
+    @Bean
+    public UserDAO getUserDAO(){
+        return new UserDAO(sessionFactory());
+    }
+    
+    
+    // Configure Services
+    
+    @Bean
+    public UserService getUserService(){
+        return new UserService();
+    }
+    
+    @Bean
+    public ProductService getProductService(){
+        return new ProductService();
+    }
+    
+    @Bean
+    public BasketService getBasketService(){
+        return new BasketService();
+    }
+    
+    @Bean
+    public DataLoader getDataLoader(){
+        return new DataLoader();
     }
 }
 
