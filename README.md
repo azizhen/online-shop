@@ -46,6 +46,12 @@ You will need the following installed:
 ``````````````````````````````````````````
 
 
+REST API
+---------------------
+The backend of the application is exposed via REST API. Sample REST URL's and JSON input can be found in the REST-API-SAMPLES file in the project.
+Currently all the services are only supporting GET. Implementation of complete REST still to be completed (POST, DELETE etc).
+
+
 How Run
 ----------------------
 Maven is configured to compile for JDK7 so make sure that you have your `JAVA_HOME` configured correctly (you can check this also by running `mvn --version`).
@@ -65,11 +71,11 @@ http://localhost:8080/productlist/
 
 To run it off another appserver such as Tomcat 7 (please ensure it is listening on port 8080):
 
-*Run the mvn command mvn clean install
-*This will generate the WAR file productlist.war
-*Place the war file in the webapps folder of your Tomcat install directory. eg. /usr/share/tomcat-7.0.50/webapps
-*Startup Tomcat and the application will startup
-*Navigate to http://localhost:8080/productlist/ in any browser
+* Run the mvn command mvn clean install
+* This will generate the WAR file productlist.war
+* Place the war file in the webapps folder of your Tomcat install directory. eg. /usr/share/tomcat-7.0.50/webapps
+* Startup Tomcat and the application will startup
+* Navigate to http://localhost:8080/productlist/ in any browser
 
 
 
