@@ -24,7 +24,7 @@ import java.security.NoSuchAlgorithmException;
 import sun.misc.BASE64Encoder;
 
 /**
- *
+ * Utility methods
  * @author aziz
  */
 public class ApplicationUtility {
@@ -33,6 +33,13 @@ public class ApplicationUtility {
       // Exists only to defeat instantiation.
    }
    
+   /**
+    * Using the SHA hashing algorithm, convert a plaintext password into a hash. 
+    * This is a one way implementation to ensure that original password cannot 
+    * be derived from hashed password
+    * @param plainPassword
+    * @return 
+    */
    public String encrypt(String plainPassword){
         MessageDigest md = null;
     try

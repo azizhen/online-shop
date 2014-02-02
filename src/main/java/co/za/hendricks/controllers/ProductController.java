@@ -1,9 +1,19 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2014 aziz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package co.za.hendricks.controllers;
 
 import co.za.hendricks.domain.Book;
@@ -25,34 +35,60 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 public class ProductController {
+
     @Autowired
     private ProductService productService;
-    
+
+    /**
+     * Create a Book entity and persist to DB
+     * @param book
+     * @return 
+     */
     @RequestMapping(value = "/createBook", method = RequestMethod.POST)
-    public @ResponseBody Book createBook(
-           @RequestBody Book book){
+    public @ResponseBody
+    Book createBook(@RequestBody Book book) {
+        
         productService.createProduct(book);
         return book;
-        
-    }    
-    
-    @RequestMapping(value = "/createGame", method = RequestMethod.POST)
-    public @ResponseBody Product createGame(
-           @RequestBody Game game){
 
-        productService.createProduct(game);        
+    }
+
+    /**
+     * Create a Game object and persist to DB
+     * @param game
+     * @return 
+     */
+    @RequestMapping(value = "/createGame", method = RequestMethod.POST)
+    public @ResponseBody
+    Product createGame(@RequestBody Game game) {
+
+        productService.createProduct(game);
         return game;
-    }
     
+    }
+
+    /**
+     * List all Products currently in database
+     * @return 
+     */
     @RequestMapping("/listProducts")
-    public @ResponseBody List<Product> getProductList(){
-        
+    public @ResponseBody
+    List<Product> getProductList() {
+
         return productService.getProductList();
-    }
     
+    }
+
+    /**
+     * Retrieve a Product using the product id
+     * @param id
+     * @return 
+     */
     @RequestMapping("/product")
-    public @ResponseBody Product getProduct(@RequestParam(value="productID", required=true) long id){
-        return productService.getProduct(id);
-    }
+    public @ResponseBody
+    Product getProduct(@RequestParam(value = "productID", required = true) long id) {
     
+        return productService.getProduct(id);
+    
+    }
 }

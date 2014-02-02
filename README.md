@@ -29,6 +29,7 @@ Todo:
 * Add Javascript unit tests
 * Add Java unit tests for DAO classes using EasyMock
 * Remove hardcoded REST API server name location calls (example localhost:8080)
+* Remove proprietry dependency on sun.misc.BASE64Encoder
 
 System Requirements
 ----------------------
@@ -36,6 +37,13 @@ You will need the following installed:
 * Maven 3.1+, ensure that your maven settings.xml file contains your proxy settings if required in a corporate environment (this is to ensure that dependencies can download)
 * JDK 1.7.0_45 is required as this is Java version that testing was done on
 * If you don't want to use the embedded Jetty, then Tomcat 7 is supported.
+* Ensure that Tomcat 7 is listening on Port 8080. This can be configured in the Tomcat directory config/server.xml:
+
+``````````````````````````````````````````
+<Connector port="8080" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443" />
+``````````````````````````````````````````
 
 
 How Run
@@ -54,6 +62,14 @@ Then navigate to the following location on your browser (assumuming Jetty's defa
 ```
 http://localhost:8080/productlist/
 ```
+
+To run it off another appserver such as Tomcat 7 (please ensure it is listening on port 8080):
+
+*Run the mvn command mvn clean install
+*This will generate the WAR file productlist.war
+*Place the war file in the webapps folder of your Tomcat install directory. eg. /usr/share/tomcat-7.0.50/webapps
+*Startup Tomcat and the application will startup
+*Navigate to http://localhost:8080/productlist/ in any browser
 
 
 

@@ -1,7 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2014 aziz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package co.za.hendricks.controllers;
@@ -30,7 +41,12 @@ public class UserController {
     
     @Autowired
     private BasketService basketService;
-    
+  
+    /**
+     * Create a User entity and persist to DB
+     * @param user
+     * @return 
+     */
     @RequestMapping(value = "/createUser", method = RequestMethod.POST)
     public @ResponseBody User createUser(
            @RequestBody User user){
@@ -39,23 +55,44 @@ public class UserController {
         
     }    
         
+    /**
+     * List all Users currently in the database
+     * @return 
+     */
     @RequestMapping("/listUsers")
     public @ResponseBody List<User> getUserList(){
         
         return userService.getUserList();
     }
     
+    /**
+     * Authenticate user using username and password
+     * @param username
+     * @param password
+     * @return 
+     */
     @RequestMapping("/login")
     public @ResponseBody boolean login(@RequestParam(value="username", required=true) String username, 
                                        @RequestParam(value="password", required=true) String password){
         return userService.userLogin(username, password);
     }
     
+    /**
+     * Retrieve User details using the username
+     * @param username
+     * @return 
+     */
     @RequestMapping("/userDetails")
     public @ResponseBody User user(@RequestParam(value="username", required=true) String username){
         return userService.getUser(username);
     }
     
+    /**
+     * Attach a Product to User's Basket
+     * @param username
+     * @param productID
+     * @return 
+     */
     @RequestMapping("/addProductToBasket")
     public @ResponseBody List<Product> addProductToUserBasket(@RequestParam(value="username", required=true) String username, 
                                        @RequestParam(value="productID", required=true) long productID){

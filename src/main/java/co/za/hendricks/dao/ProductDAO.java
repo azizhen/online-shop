@@ -1,7 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2014 aziz
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package co.za.hendricks.dao;
@@ -33,6 +44,10 @@ public class ProductDAO {
         this.sessionFactory = sessionFactory;
     }
     
+    /**
+     * Persist Product entity
+     * @param product 
+     */
     public void createProduct(Product product){
         
         //TODO Need to figure out how to configure the transactions so that Spring manages this using the @Transaction annotation
@@ -41,7 +56,10 @@ public class ProductDAO {
         tx.commit();
         }
     
-    
+    /**
+     * Return all Products
+     * @return 
+     */
     public List<Product> findAll(){
         Transaction tx  = this.sessionFactory.getCurrentSession().beginTransaction();
         List <Product> productList =  this.sessionFactory.getCurrentSession().createQuery("from Product").list();
@@ -49,11 +67,15 @@ public class ProductDAO {
         return productList;
     }
     
+    /**
+     * Return Product by ID
+     * @param productID
+     * @return 
+     */
     public Product getProduct(long productID){
         Transaction tx  = this.sessionFactory.getCurrentSession().beginTransaction();
         Product product =  (Product)this.sessionFactory.getCurrentSession().get(Product.class, productID);
         tx.commit();
         return product;
-    }
- 
+    } 
 }

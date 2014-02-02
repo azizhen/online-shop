@@ -18,7 +18,7 @@
 package co.za.hendricks.exceptions;
 
 /**
- *
+ * Custom Exception to return Application Exceptions to the frontend 
  * @author aziz
  */
 public class ApplicationException extends RuntimeException{
